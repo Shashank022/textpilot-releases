@@ -61,9 +61,9 @@ jobs:
           This is an independent photo-preparation utility, not a government service. Requirements can change and final acceptance is controlled by the issuing authority. Verify current official requirements before submitting a photo. Some authorities, including Canada for passport photos, require a commercial photographer/studio and professional printing; this app does not replace those requirements.
           NOTES
 
-          if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release upload "$TAG"               release/Passport-Photo-Studio-Windows-x64.exe               release/Passport-Photo-Studio-Mac-Apple-Silicon.dmg               release/Passport-Photo-Studio-Mac-Intel.dmg               --clobber
-            gh release edit "$TAG" --notes-file notes.md --prerelease
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$TAG"               release/Passport-Photo-Studio-Windows-x64.exe               release/Passport-Photo-Studio-Mac-Apple-Silicon.dmg               release/Passport-Photo-Studio-Mac-Intel.dmg               --clobber --repo "$GITHUB_REPOSITORY"
+            gh release edit "$TAG" --repo "$GITHUB_REPOSITORY" --notes-file notes.md --prerelease
           else
-            gh release create "$TAG"               release/Passport-Photo-Studio-Windows-x64.exe               release/Passport-Photo-Studio-Mac-Apple-Silicon.dmg               release/Passport-Photo-Studio-Mac-Intel.dmg               --title 'Passport Photo Studio v0.1.0 — Public Beta'               --notes-file notes.md --prerelease
+            gh release create "$TAG"               release/Passport-Photo-Studio-Windows-x64.exe               release/Passport-Photo-Studio-Mac-Apple-Silicon.dmg               release/Passport-Photo-Studio-Mac-Intel.dmg               --title 'Passport Photo Studio v0.1.0 — Public Beta'               --notes-file notes.md --prerelease --repo "$GITHUB_REPOSITORY"
           fi
